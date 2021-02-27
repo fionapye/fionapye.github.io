@@ -9,15 +9,13 @@ comments: true
 toc: true
 ---
 
-PIVOT() is used to turn a long table into a wide table, this can be used for summaries (eg the classic pivot table) or just to change to a different tabular format. <br>
+Pivot is used to turn a long table into a wide table, this can be used for summaries or a different display format for data.
 
-Context Links: 
-- [Pivot - Wikipedia](https://en.wikipedia.org/wiki/Pivot_table)
-- [Long (narrow) vs Wide Data - Wikipedia](https://en.wikipedia.org/wiki/Wide_and_narrow_data)
-- [Microsoft Pivot Documentation](https://docs.microsoft.com/en-us/sql/t-sql/queries/from-using-pivot-and-unpivot?view=sql-server-ver15)
-
-
+```
 ## Simple Pivot
+## Pivot with Multiple Aggregates
+## Multiple Pivot
+## Unpivot
 
 
 ## Pivot with Dynamic SQL
@@ -28,17 +26,18 @@ To find out more about [dynamic SQL](comingsoon) check out the post (coming soon
 
 Example source: the code is written by me, but the example data/scenario comes from this [stackoverflow question](https://stackoverflow.com/questions/20676984/how-to-pivot-how-to-convert-multiple-rows-into-one-row-with-multiple-columns/66393505#66393505)
 
-**Initial Data** <br>
+**Initial Data**
+
 The data at the start looks like this, two tables relating to clients and products in long form.
 
-_Clients_ 
+_Clients_
 
 | ClientID | Name | 
 | :------ | :--- | 
 | 1 | Name1 |
 | 2 | Name2 |
 
-_Products_ 
+_Products_
 
 | ProductID | ClientID | Product |
 | :------ |:--- | :--- | 
@@ -49,7 +48,8 @@ _Products_
 | 5 | 2 | SomeproductD |
 | 6 | 2 | SomeproductA |
 
-**Result** <br>
+**Result**
+
 Here is the pivoted (wide) table that is created with the dynamic pivot shown in the code block below.
 
 | ClientID | ClientName | Product1 | Product2 | Product3 |
@@ -58,11 +58,7 @@ Here is the pivoted (wide) table that is created with the dynamic pivot shown in
 | 2 | Name2 | SomeproductA | SomeproductC | SomeproductD |
 
 
-**Code** <br>
-The code below provides a working example of this type of pivot.
-
-{: .box-warning}
-**Warning:** because the query is written within a string, linters may not detect syntax errors.
+**Code**
 
 {% highlight SQL linenos %}
 -- variable tables to store data
@@ -149,8 +145,20 @@ DROP TABLE #Client_Products
 
 {% endhighlight %}
 
-## Pivot with Multiple Aggregates
-## Multiple Pivot
-Discussion see this [stackoverflow question](https://stackoverflow.com/questions/15274305/is-it-possible-to-have-multiple-pivots-using-the-same-pivot-column-using-sql-ser)
+## Boxes
+You can add notification, warning and error boxes like this:
 
-## Unpivot
+### Notification
+
+{: .box-note}
+**Note:** This is a notification box.
+
+### Warning
+
+{: .box-warning}
+**Warning:** This is a warning box.
+
+### Error
+
+{: .box-error}
+**Error:** This is an error box.
