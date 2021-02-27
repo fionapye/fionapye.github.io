@@ -13,7 +13,7 @@ Since I learnt a lot from the online community I wanted to give something back, 
 I mainly work with Microsoft SQL Server using Transact-SQL (T-SQL) so the examples on here (at least for now) are primarily for this, although I am sure a lot of the logic carries between versions.
 
 ## Tags
-The SQL resources are tagged with the version of SQL they were developed in.
+The SQL resources are tagged with the version of SQL they were developed in. See the Key below.
 
 ### Key
 T-SQL - Transact SQL <br>
