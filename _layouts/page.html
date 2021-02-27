@@ -17,6 +17,16 @@ layout: base
 
       {{ content }}
 
+{% if page.tag %}
+      <h1>Posts</h1>
+      <ul>
+      {% for post in site.tags[page.tag] %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date_to_string }})<br>
+          {{ post.subtitle}}
+        </li>
+      {% endfor %}
+      </ul>
+{% endif %}
       {% if page.after-content %}
         <div class="after-content">
           {% for file in page.after-content %}

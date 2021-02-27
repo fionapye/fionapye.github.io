@@ -27,13 +27,3 @@ SQLServer - Microsoft SQL Server
 [W3Schools](https://www.w3schools.com/sql/default.asp ) → super useful for syntax, very user friendly, really great for basics! <br>
 [Microsoft Documentation](https://docs.microsoft.com/en-us/sql/t-sql/language-reference?view=sql-server-ver15) → for SQL Server they built it! Less user friendly, but right into the technical detail. <br>
 [StackOverflow](https://stackoverflow.com/) → Awesome community that can answer any question! <br>
-
-
-# Posts
-<ul>
-{% for post in site.tags[page.tag] %}
-  <li><a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date_to_string }})<br>
-    {{ post.subtitle}}
-  </li>
-{% endfor %}
-</ul>
