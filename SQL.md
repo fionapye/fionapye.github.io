@@ -2,6 +2,7 @@
 layout: page
 title: SQL
 subtitle: A page to link all the SQL resources together
+tag: SQL
 ---
 
 # Background
@@ -29,4 +30,10 @@ SQLServer - Microsoft SQL Server
 
 
 # Posts
-
+<ul>
+{% for post in site.tags[page.tag] %}
+  <li><a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date_to_string }})<br>
+    {{ post.subtitle}}
+  </li>
+{% endfor %}
+</ul>
