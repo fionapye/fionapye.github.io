@@ -18,6 +18,7 @@ navbar-links:
   Resources:
     - Beautiful Jekyll: ""
     - Learn markdown: "https://www.markdowntutorial.com/"
+    - SQL: "SQL"
   Author's home: "https://github.com/fionapye"
 
 # --- Logo --- #
