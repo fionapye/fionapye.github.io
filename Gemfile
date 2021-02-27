@@ -12,4 +12,6 @@ install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
   gem 'wdm', '>= 0.1.0'
 end
 
+# Additional plugins
+gem 'jekyll-toc'
 gem "webrick"
