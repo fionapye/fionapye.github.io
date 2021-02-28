@@ -11,10 +11,13 @@ The inspiration for this website came from working with SQL and realising that p
 I realised that the most efficient way was to store them somewhere central and accessible, along with nice demos of their functionality.
 Since I learnt a lot from the online community I wanted to give something back, and so this blog came into being!
 
-I mainly work with Microsoft SQL Server using Transact-SQL (T-SQL) so the examples on here (at least for now) are primarily for this, although I am sure a lot of the logic carries between versions.
+I mainly work with Microsoft SQL Server using Transact-SQL (T-SQL) so the examples on here (at least for now) are primarily for this, although I am sure a lot of the logic carries between versions. 
+
+Please bear in mind that these may not be optimal solutions.
 
 ## Tags
 The SQL resources are tagged with the version of SQL they were developed in. See the Key below.
+Relational Database Management System (RDBMS)
 
 ### Key
 T-SQL - Transact SQL <br>
@@ -27,3 +30,4 @@ SQLServer - Microsoft SQL Server
 [W3Schools](https://www.w3schools.com/sql/default.asp ) → super useful for syntax, very user friendly, really great for basics! <br>
 [Microsoft Documentation](https://docs.microsoft.com/en-us/sql/t-sql/language-reference?view=sql-server-ver15) → for SQL Server they built it! Less user friendly, but right into the technical detail. <br>
 [StackOverflow](https://stackoverflow.com/) → Awesome community that can answer any question! <br>
+[Connect to SQL Server on Linux from Windows](https://cswsolutions.com/blog/posts/2020/may/connecting-remotely-to-sql-server-on-linux/) → instructions for connecting and firewall settings
