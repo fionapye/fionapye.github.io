@@ -16,8 +16,8 @@ author: Fiona Pye
 navbar-links:
   About Me: "aboutme"
   Resources:
-    - Beautiful Jekyll: ""
-    - Learn markdown: "https://www.markdowntutorial.com/"
+#    - Beautiful Jekyll: ""
+#    - Learn markdown: "https://www.markdowntutorial.com/"
     - SQL: "SQL"
   Author's home: "https://github.com/fionapye"
 
