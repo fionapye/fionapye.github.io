@@ -42,9 +42,9 @@ round-avatar: true
 social-network-links:
 #  email: "someone@example.com"
 #  facebook: deanattali
-  github: "https://github.com/fionapye"
-  twitter: "https://twitter.com/PyeFiona"
-  linkedin: https://www.linkedin.com/in/fiona-pye-74778213a/
+  github: fionapye
+  twitter: PyeFiona
+  linkedin: fiona-pye-74778213a
 #  patreon: DeanAttali
 #  youtube: c/daattali
 #  medium: yourname
