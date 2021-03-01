@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Beautiful Jekyll 5.0.0 | Copyright Dean Attali 2020 -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+
+  
+
+  <title>PIVOT()</title>
+
+  
+  <meta name="author" content="Fiona Pye">
+  
+
+  <meta name="description" content="Pivot functions, from basic to dynamic">
+
+  
+
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Code Blooded" href="/feed.xml">
+
+  
+
+  
+
+  
+
+
+  
+    
+      
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    
+      
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+
+
+    
+      
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/assets/css/bootstrap-social.css">
+    
+      <link rel="stylesheet" href="/assets/css/beautifuljekyll.css">
+    
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+  <meta property="og:site_name" content="Code Blooded">
+  <meta property="og:title" content="PIVOT()">
+  <meta property="og:description" content="Pivot functions, from basic to dynamic">
+
+  
+  <meta property="og:image" content="/assets/img/avatar-icon.png">
+  
+
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="/drafts/2021-02-27-counts-groups-sequence/">
+  <link rel="canonical" href="/drafts/2021-02-27-counts-groups-sequence/">
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:site" content="@PyeFiona">
+  <meta name="twitter:creator" content="@PyeFiona">
+
+  <meta property="twitter:title" content="PIVOT()">
+  <meta property="twitter:description" content="Pivot functions, from basic to dynamic">
+
+  
+  <meta name="twitter:image" content="/assets/img/avatar-icon.png">
+  
+
+  
+
+
+  
+
+  
+
+</head>
+
+
+<body>
+
+  
+
+
+  <nav class="navbar navbar-expand-xl navbar-light fixed-top navbar-custom top-nav-regular"><a class="navbar-brand" href="">Code Blooded</a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/aboutme">About Me</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resources</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="/SQL">SQL</a>
+            </div>
+          </li>
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/fionapye">Author's home</a>
+          </li></ul>
+  </div>
+
+  
+
+  
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        <a href="">
+          <img alt="Navigation bar avatar" class="avatar-img" src="/assets/img/avatar-icon.png" />
+        </a>
+      </div>
+    </div>
+  
+
+</nav>
+
+
+  <!-- TODO this file has become a mess, refactor it -->
+
+
+
+
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container-md">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+        <div class="post-heading">
+          <h1>PIVOT()</h1>
+          
+            
+              <h2 class="post-subheading">Pivot functions, from basic to dynamic</h2>
+            
+          
+
+          
+            <span class="post-meta">Posted on </span>
+            
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class=" container-md ">
+  <div class="row">
+    <div class=" col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 ">
+
+      
+
+      
+
+      <article role="main" class="blog-post">
+        <div>
+          <div id="table-of-contents">
+            <b> Table of Contents</b>
+
+            <ul id="toc" class="section-nav">
+</ul>
+          </div>
+          <div id="markdown-content">
+            <p>Pivot is used to turn a long table into a wide table, this can be used for summaries or a different display format for data.</p>
+
+<p>```</p>
+<h2 id="simple-pivot">Simple Pivot</h2>
+<h2 id="pivot-with-multiple-aggregates">Pivot with Multiple Aggregates</h2>
+<h2 id="multiple-pivot">Multiple Pivot</h2>
+<h2 id="unpivot">Unpivot</h2>
+
+<h2 id="pivot-with-dynamic-sql">Pivot with Dynamic SQL</h2>
+
+<p>When the resultant table will contain lots of columns, its best to use dynamic SQL to work out the column headers so that they don’t have to be written out explicitly.</p>
+
+<p>To find out more about <a href="comingsoon">dynamic SQL</a> check out the post (coming soon).</p>
+
+<p>Example source: the code is written by me, but the example data/scenario comes from this <a href="https://stackoverflow.com/questions/20676984/how-to-pivot-how-to-convert-multiple-rows-into-one-row-with-multiple-columns/66393505#66393505">stackoverflow question</a></p>
+
+<p><strong>Initial Data</strong></p>
+
+<p>The data at the start looks like this, two tables relating to clients and products in long form.</p>
+
+<p><em>Clients</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ClientID</th>
+      <th style="text-align: left">Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">Name1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">Name2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>Products</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ProductID</th>
+      <th style="text-align: left">ClientID</th>
+      <th style="text-align: left">Product</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">SomeproductA</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">SomeproductB</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">3</td>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">SomeproductA</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">4</td>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">SomeproductC</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">5</td>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">SomeproductD</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">6</td>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">SomeproductA</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Result</strong></p>
+
+<p>Here is the pivoted (wide) table that is created with the dynamic pivot shown in the code block below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">ClientID</th>
+      <th style="text-align: left">ClientName</th>
+      <th style="text-align: left">Product1</th>
+      <th style="text-align: left">Product2</th>
+      <th style="text-align: left">Product3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">Name1</td>
+      <td style="text-align: left">SomeproductA</td>
+      <td style="text-align: left">SomeproductA</td>
+      <td style="text-align: left">SomeproductB</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">Name2</td>
+      <td style="text-align: left">SomeproductA</td>
+      <td style="text-align: left">SomeproductC</td>
+      <td style="text-align: left">SomeproductD</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Code</strong></p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+</pre></td><td class="code"><pre><span class="c1">-- variable tables to store data</span>
+<span class="k">DECLARE</span> <span class="o">@</span><span class="n">Clients</span> <span class="k">TABLE</span><span class="p">(</span><span class="n">ClientID</span> <span class="nb">int</span><span class="p">,</span> 
+                <span class="n">ClientName</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="k">DECLARE</span> <span class="o">@</span><span class="n">Products</span> <span class="k">TABLE</span><span class="p">(</span><span class="n">ProductID</span> <span class="nb">int</span><span class="p">,</span> 
+                    <span class="n">ClientID</span> <span class="nb">int</span><span class="p">,</span> 
+                    <span class="n">Product</span> <span class="n">nvarchar</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+
+<span class="c1">-- populate the variable tables with sample data</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="o">@</span><span class="n">Clients</span> 
+<span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Name1'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'Name2'</span><span class="p">)</span>
+
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="o">@</span><span class="n">Products</span> 
+<span class="k">VALUES</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'SomeproductA'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'SomeproductB'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'SomeproductA'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'SomeproductC'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'SomeproductD'</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'SomeproductA'</span><span class="p">)</span>
+
+<span class="c1">-- display the tables to check</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="o">@</span><span class="n">Clients</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="o">@</span><span class="n">Products</span>
+
+<span class="c1">-- join the two tables and generate a column with rows which will become the new </span>
+<span class="c1">-- column names (Product_col) which gives a number to each product per client</span>
+<span class="k">SELECT</span> <span class="k">c</span><span class="p">.</span><span class="n">ClientID</span><span class="p">,</span> 
+    <span class="k">c</span><span class="p">.</span><span class="n">ClientName</span><span class="p">,</span> 
+    <span class="n">p</span><span class="p">.</span><span class="n">ProductID</span><span class="p">,</span> 
+    <span class="n">p</span><span class="p">.</span><span class="n">Product</span><span class="p">,</span>
+    <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'Product'</span><span class="p">,</span> <span class="n">ROW_NUMBER</span><span class="p">()</span> 
+        <span class="n">OVER</span><span class="p">(</span><span class="n">PARTITION</span> <span class="k">BY</span> <span class="k">c</span><span class="p">.</span><span class="n">ClientID</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">p</span><span class="p">.</span><span class="n">Product</span> <span class="k">ASC</span><span class="p">))</span>  <span class="k">AS</span> <span class="n">Product_col</span>
+<span class="k">INTO</span> <span class="o">#</span><span class="n">Client_Products</span>
+<span class="k">FROM</span> <span class="o">@</span><span class="n">Products</span> <span class="n">p</span> 
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="o">@</span><span class="n">Clients</span> <span class="k">c</span> <span class="k">ON</span> <span class="k">c</span><span class="p">.</span><span class="n">ClientID</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">ClientID</span>
+
+<span class="c1">-- view the joined data and future column headings</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="o">#</span><span class="n">Client_Products</span>
+
+<span class="c1">-- setup for the pivot, declare the variables to contain the column names for pivoted </span>
+<span class="c1">-- rows and the query string</span>
+<span class="k">DECLARE</span> <span class="o">@</span><span class="n">cols1</span> <span class="k">AS</span> <span class="n">NVARCHAR</span><span class="p">(</span><span class="k">MAX</span><span class="p">),</span>
+    <span class="o">@</span><span class="n">query</span>  <span class="k">AS</span> <span class="n">NVARCHAR</span><span class="p">(</span><span class="k">MAX</span><span class="p">);</span>
+
+<span class="c1">-- column name list for products</span>
+<span class="k">SET</span> <span class="o">@</span><span class="n">cols1</span> <span class="o">=</span> <span class="n">STUFF</span><span class="p">((</span><span class="k">SELECT</span> <span class="k">distinct</span> <span class="s1">','</span> <span class="o">+</span> <span class="n">QUOTENAME</span><span class="p">(</span><span class="n">Product_col</span><span class="p">)</span> 
+        <span class="k">FROM</span> <span class="o">#</span><span class="n">Client_Products</span>
+        <span class="k">FOR</span> <span class="n">XML</span> <span class="n">PATH</span><span class="p">(</span><span class="s1">''</span><span class="p">),</span> <span class="k">TYPE</span>
+        <span class="p">).</span><span class="n">value</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'NVARCHAR(MAX)'</span><span class="p">)</span> 
+    <span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">''</span><span class="p">)</span>
+
+<span class="k">SELECT</span> <span class="o">@</span><span class="n">cols1</span>  <span class="c1">-- view the future column names</span>
+
+<span class="c1">-- generate query variable string</span>
+
+<span class="c1">-- the top select is all the columns you want to actually see as the result</span>
+<span class="c1">-- The inner query needs the columns you want to see in the result, and the columns </span>
+<span class="c1">-- you are pivoting with. The pivot needs to select the value you want to go into the </span>
+<span class="c1">-- new columns (MAX()) and the values that will become the column names (FOR x IN())</span>
+<span class="k">SET</span> <span class="o">@</span><span class="n">query</span> <span class="o">=</span> <span class="s1">'SELECT ClientID, 
+            ClientName,'</span>
+                <span class="o">+</span> <span class="o">@</span><span class="n">cols1</span> <span class="o">+</span><span class="s1">' 
+            FROM
+            (
+                SELECT ClientID,
+                    ClientName,
+                    Product_col,
+                    Product
+                FROM #Client_Products
+           ) x
+         PIVOT 
+        (
+            MAX(Product)
+            FOR Product_col IN ('</span> <span class="o">+</span> <span class="o">@</span><span class="n">cols1</span> <span class="o">+</span> <span class="s1">')
+        ) p'</span>
+
+
+<span class="k">EXECUTE</span><span class="p">(</span><span class="o">@</span><span class="n">query</span><span class="p">)</span> <span class="c1">-- execute the dynamic sql</span>
+
+<span class="k">DROP</span> <span class="k">TABLE</span> <span class="o">#</span><span class="n">Client_Products</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="boxes">Boxes</h2>
+<p>You can add notification, warning and error boxes like this:</p>
+
+<h3 id="notification">Notification</h3>
+
+<p class="box-note"><strong>Note:</strong> This is a notification box.</p>
+
+<h3 id="warning">Warning</h3>
+
+<p class="box-warning"><strong>Warning:</strong> This is a warning box.</p>
+
+<h3 id="error">Error</h3>
+
+<p class="box-error"><strong>Error:</strong> This is an error box.</p>
+
+          </div>
+        </div>
+      </article>
+
+      
+      <div class="blog-tags">
+        <span>Tags:</span>
+        
+        <a href="/tags#SQL">SQL</a>
+        
+        <a href="/tags#SQLServer">SQLServer</a>
+        
+        <a href="/tags#T-SQL">T-SQL</a>
+        
+        <a href="/tags#Pivot">Pivot</a>
+        
+      </div>
+      
+
+      
+
+      
+
+      <ul class="pagination blog-pager">
+        
+        
+      </ul>
+      
+  
+  
+  
+
+  
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+  <footer>
+  <div class="container-md beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+      <ul class="list-inline text-center footer-links"><li class="list-inline-item">
+    <a href="https://github.com/fionapye" title="GitHub">
+      <span class="fa-stack fa-lg" aria-hidden="true">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="sr-only">GitHub</span>
+   </a>
+  </li><li class="list-inline-item">
+    <a href="https://twitter.com/PyeFiona" title="Twitter">
+      <span class="fa-stack fa-lg" aria-hidden="true">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="sr-only">Twitter</span>
+   </a>
+  </li><li class="list-inline-item">
+    <a href="https://linkedin.com/in/fiona-pye-74778213a" title="LinkedIn">
+      <span class="fa-stack fa-lg" aria-hidden="true">
+        <i class="fas fa-circle fa-stack-2x"></i>
+        <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="sr-only">LinkedIn</span>
+   </a>
+  </li></ul>
+
+      
+      <p class="copyright text-muted">
+      
+        Fiona Pye
+        &nbsp;&bull;&nbsp;
+      
+      2021
+
+      
+        &nbsp;&bull;&nbsp;
+        <span class="author-site">
+          <a href="">fionapye.github.io</a>
+        </span>
+      
+
+      
+      </p>
+      <p class="theme-by text-muted">
+        Powered by
+        <a href="https://beautifuljekyll.com">Beautiful Jekyll</a>
+      </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  
+  
+    
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+  
+    
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script src="/assets/js/beautifuljekyll.js"></script>
+    
+  
+
+
+
+
+
+
+
+
+
+</body>
+</html>

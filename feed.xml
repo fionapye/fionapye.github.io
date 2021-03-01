@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    
+    <title>Code Blooded</title>
+    
+    
+    <link></link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+    
+    
+      <item>
+        <title>PIVOT()</title>
+        <description>
+          Pivot functions, from basic to dynamic - 
+          PIVOT() is used to turn a long table into a wide table, this can be used for summaries (eg the classic pivot table) or just to change to a different tabular format. Context Links: Pivot - Wikipedia Long (narrow) vs Wide Data - Wikipedia Microsoft Pivot Documentation Aggregates in T-SQL...
+        </description>
+        <pubDate>Sat, 27 Feb 2021 00:00:00 -0500</pubDate>
+        <link>/2021-02-27-pivot/</link>
+        <guid isPermaLink="true">/2021-02-27-pivot/</guid>
+      </item>
+    
+  </channel>
+</rss>
